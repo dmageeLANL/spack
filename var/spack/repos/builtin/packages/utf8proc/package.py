@@ -15,4 +15,15 @@ class Utf8proc(CMakePackage):
 
     version('2.4.0', sha256='b2e5d547c1d94762a6d03a7e05cea46092aab68636460ff8648f1295e2cdfbd7')
 
+    variant('shared', default=True,
+            description='Build shared libs')
+
     depends_on('cmake@2.8.12:', type='build')
+
+    def cmake_args(self):
+        options = []
+
+        if '+shared' in self.spec:
+            options.append('-DBUILD_SHARED_LIBS=TRUE')
+
+        return options

@@ -33,6 +33,9 @@ class Mbedtls(CMakePackage):
             values=('Debug', 'Release', 'Coverage', 'ASan', 'ASanDbg',
                     'MemSan', 'MemSanDbg', 'Check', 'CheckFull'))
 
+    variant('shared', default=True,
+            description='Build shared libs')
+
     variant('pic', default=False,
             description='Compile with position independent code.')
 
@@ -47,3 +50,12 @@ class Mbedtls(CMakePackage):
             flags.append(self.compiler.cc_pic_flag)
 
         return (flags, None, None)
+
+    def cmake_args(self):
+
+        options = []
+
+        if '+shared' in self.spec:
+            options.append('-DUSE_SHARED_MBEDTLS_LIBRARY=ON')
+
+        return options
