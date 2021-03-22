@@ -81,7 +81,7 @@ class MockPackageMultiRepo(object):
 
     def __init__(self):
         self.spec_to_pkg = {}
-        self.namespace = ''
+        self.namespace = None
         self.full_namespace = 'spack.pkg.mock'
 
     def get(self, spec):
